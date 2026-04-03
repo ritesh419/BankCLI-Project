@@ -29,13 +29,3 @@ This project is built using standard Python and highlights several foundational 
 * **Class & Static Methods:** Using `@classmethod` for tracking total accounts and `@staticmethod` for input validation.
 
 ---
-
-## 🚀 How to Run
-
-### Prerequisites
-* Python 3.x installed on your machine. No external libraries are required.
-
-### Execution
-1. Clone the repository:
-   ```bash
-   https://github.com/ritesh419/BankCLI-Project.git
