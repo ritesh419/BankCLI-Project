@@ -1,8 +1,3 @@
-Here is a complete, well-structured `README.md` file tailored specifically for your Python banking application. You can copy and paste this directly into your GitHub repository.
-
-***
-
-```markdown
 # PyBank 🏦
 
 A simple, interactive command-line banking application written in Python. 
@@ -43,62 +38,4 @@ This project is built using standard Python and highlights several foundational 
 ### Execution
 1. Clone the repository:
    ```bash
-   git clone [https://github.com/yourusername/pybank.git](https://github.com/yourusername/pybank.git)
-   ```
-2. Navigate to the project directory:
-   ```bash
-   cd pybank
-   ```
-3. Run the script:
-   ```bash
-   python main.py 
-   ```
-   *(Note: Replace `main.py` with the actual filename of your Python script)*
-
----
-
-## 💻 Usage Preview
-
-When you run the script, you will be greeted with the main menu:
-
-```text
-─── PyBank ───────────────────
-1. Create account
-2. Deposit
-3. Withdraw
-4. Show balance & history
-5. Exit
-──────────────────────────────
-Enter your choice between [1-5]: 
-```
-
-**Example Workflow:**
-1. Select `1` to create an account.
-2. Choose between a Savings (`1`) or Current (`2`) account.
-3. Enter your name to register.
-4. Use the menu to deposit funds, withdraw, or check your balance and complete transaction history!
-
----
-
-## 📂 Project Structure
-
-* **Core Classes:**
-  * `BankAccount`: The base class managing balances, names, and general transactions.
-  * `SavingsAccount`: Adds a 4% default interest rate and withdrawal fees.
-  * `CurrentAccount`: Adds overdraft functionality.
-* **Exceptions:**
-  * `BankError`: Base exception for application-specific errors.
-  * `InsufficientFundsError`: Triggered when withdrawal exceeds balance/overdraft.
-  * `InvalidAmountError`: Triggered on negative or zero amounts.
-* **Helper Functions:** Clean, separated logic for CLI inputs (`create_account`, `deposit`, `withdraw`, `show_balance`).
-
----
-
-## 🤝 Contributing
-
-Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/yourusername/pybank/issues) if you want to contribute.
-
-## 📝 License
-
-This project is open-source and available under the [MIT License](LICENSE).
-```
+ 
