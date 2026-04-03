@@ -1,5 +1,6 @@
 # ──all main classes────────────────────────────────
 
+
 class BankAccount:
     bank_name = "SBI"
     bank_branch = "Khatima"
@@ -58,6 +59,7 @@ class SavingsAccount(BankAccount):
         super().withdraw(total)
         print(f"Fee of {self.FEE} charged")
 
+
 class CurrentAccount(BankAccount):
     def __init__(self, name, balance=0, overdraft_limit=5000):
         super().__init__(name, balance)
@@ -75,6 +77,7 @@ class CurrentAccount(BankAccount):
 
 
 # ── all exception classes────────────────────────────────────
+
 
 class BankError(Exception):
     pass
@@ -95,16 +98,18 @@ class InvalidAmountError(BankError):
 
 # ── helper functions ─────────────────────────────────────
 
+
 def get_int_input(prompt):
     try:
         return int(input(prompt))
     except ValueError:
         print("Enter only integer.")
 
+
 def create_account(accounts):
     choice = get_int_input("Enter any choice: 1. Saving     2. Current: \n")
 
-    if choice not in (1,2):
+    if choice not in (1, 2):
         raise BankError("Please enter only number 1 or 2.")
 
     owner = input("Enter owner's name: \n").strip()
@@ -112,7 +117,7 @@ def create_account(accounts):
         raise BankError("Name cannot be empty.")
     if owner.isdigit():
         raise BankError("Name should contains letter, not just numbers.")
-    
+
     if owner in accounts:
         raise BankError(f"Account for '{owner}' already exists.")
 
@@ -123,6 +128,7 @@ def create_account(accounts):
     accounts[owner] = user
     print(f"{type(user).__name__} created for {owner}")
 
+
 def deposit(accounts):
     owner = input("Enter owner's name: \n").strip()
     if owner not in accounts:
@@ -131,6 +137,7 @@ def deposit(accounts):
     accounts[owner].deposit(amount)
     print(accounts[owner])
 
+
 def withdraw(accounts):
     owner = input("Enter owner's name: \n").strip()
     if owner not in accounts:
@@ -138,11 +145,12 @@ def withdraw(accounts):
     amount = get_int_input("Enter the withdraw amount: \n")
     accounts[owner].withdraw(amount)
     print(accounts[owner])
-    
+
+
 def show_balance(accounts):
     owner = input("Enter owner's name: \n").strip()
     if owner not in accounts:
-        raise BankError(f"No account found for '{owner}'.")    
+        raise BankError(f"No account found for '{owner}'.")
     acc = accounts[owner]
     print(f"Balance: {acc.balance}")
     print(f"Trabsaction history: {acc.get_history()}")
@@ -150,7 +158,7 @@ def show_balance(accounts):
 
 # ── main menu loop ───────────────────────────────────────────────────
 
-accounts = {}       # stores all accounts
+accounts = {}  # stores all accounts
 
 while True:
     print("\n─── PyBank ───────────────────")
@@ -178,8 +186,3 @@ while True:
 
     except (BankError, Exception) as e:
         print(f"Error: {e}")
-
-
-
-
-
