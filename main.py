@@ -1,5 +1,8 @@
 # ──all main classes────────────────────────────────
 
+import json
+import os
+
 
 class BankAccount:
     bank_name = "SBI"
@@ -126,7 +129,8 @@ def create_account(accounts):
     else:
         user = CurrentAccount(owner)
     accounts[owner] = user
-    print(f"{type(user).__name__} created for {owner}")
+    return user
+    # print(f"{type(user).__name__} created for {owner}")
 
 
 def deposit(accounts):
@@ -134,8 +138,10 @@ def deposit(accounts):
     if owner not in accounts:
         raise BankError(f"No account found for '{owner}'.")
     amount = get_int_input("Enter the deposit amount: \n")
-    accounts[owner].deposit(amount)
-    print(accounts[owner])
+    user = accounts[owner].deposit(amount)
+    # print(accounts[owner])
+    print(user)
+    return user
 
 
 def withdraw(accounts):
@@ -144,7 +150,6 @@ def withdraw(accounts):
         raise BankError(f"No account found for '{owner}'.")
     amount = get_int_input("Enter the withdraw amount: \n")
     accounts[owner].withdraw(amount)
-    print(accounts[owner])
 
 
 def show_balance(accounts):
@@ -152,13 +157,44 @@ def show_balance(accounts):
     if owner not in accounts:
         raise BankError(f"No account found for '{owner}'.")
     acc = accounts[owner]
-    print(f"Balance: {acc.balance}")
-    print(f"Trabsaction history: {acc.get_history()}")
+
+
+def account_to_dict(accounts):
+    return {
+        "type": type(accounts).__name__,
+        "name": accounts.name,
+        "balance": accounts.balance,
+        "transactions": accounts.transactions,
+    }
+
+
+def save_accounts(accounts, filepath="accounts.json"):
+    data = {name: account_to_dict(acc) for name, acc in accounts.items()}
+    with open(filepath, "w") as f:
+        json.dump(data, f, indent=2)
+
+
+def load_accounts(filepath="accounts.json"):
+    if not os.path.exists(filepath):
+        return {}
+    try:
+        with open(filepath, "r") as f:
+            data = json.load(f)
+        accounts = {}
+        for name, acc_data in data.items():
+            if acc_data["type"] == "SavingAccount":
+                acc = SavingsAccount(acc_data["name"], acc_data["balance"])
+            else:
+                acc = CurrentAccount(acc_data["name"], acc_data["balance"])
+            acc.transactions = acc_data["transactions"]
+            accounts[name] = acc
+    except json.JSONDecodeError:
+        return {}
 
 
 # ── main menu loop ───────────────────────────────────────────────────
 
-accounts = {}  # stores all accounts
+accounts = load_accounts()
 
 while True:
     print("\n─── PyBank ───────────────────")
@@ -172,10 +208,13 @@ while True:
         user_choice = get_int_input("Enter your choice between [1-5]: \n")
         if user_choice == 1:
             create_account(accounts)
+            save_accounts(accounts)
         elif user_choice == 2:
             deposit(accounts)
+            save_accounts(accounts)
         elif user_choice == 3:
             withdraw(accounts)
+            save_accounts(accounts)
         elif user_choice == 4:
             show_balance(accounts)
         elif user_choice == 5:
