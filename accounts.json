@@ -1,24 +1,10 @@
 {
-  "rg": {
-    "type": "CurrentAccount",
-    "name": "rg",
-    "balance": 2000,
-    "transactions": [
-      "Deposit: 2000"
-    ]
-  },
-  "agg": {
-    "type": "SavingsAccount",
-    "name": "agg",
-    "balance": 0,
-    "transactions": []
-  },
-  "rgg": {
-    "type": "SavingsAccount",
-    "name": "rgg",
-    "balance": 234,
-    "transactions": [
-      "Deposit: 234"
-    ]
-  }
+    "ritesh": {
+        "type": "CurrentAccount",
+        "name": "ritesh",
+        "balance": 2000,
+        "transactions": [
+            "Deposit: 2002"
+        ]
+    }
 }
